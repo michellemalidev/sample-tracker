@@ -1,5 +1,6 @@
 import json
 import os
+import csv
 
 # File to store sample data
 DATA_FILE = 'samples.json'
@@ -66,6 +67,15 @@ def delete_sample(samples):
     else:
         print("Invalid sample number.")
 
+# Export samples to a CSV file
+def export_samples_to_csv(samples):
+    csv_file = 'samples.csv'
+    with open(csv_file, 'w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=["sample_id", "sample_type", "location", "status"])
+        writer.writeheader()
+        writer.writerows(samples)
+    print(f"Samples exported successfully to {csv_file}!")
+
 # Main function to run the application
 def main():
     samples = load_samples()
@@ -75,7 +85,8 @@ def main():
         print("2. View Samples")
         print("3. Update Sample")
         print("4. Delete Sample")
-        print("5. Exit")
+        print("5. Export Samples to CSV")
+        print("6. Exit")
         
         choice = input("Choose an option: ")
         if choice == '1':
@@ -87,6 +98,8 @@ def main():
         elif choice == '4':
             delete_sample(samples)
         elif choice == '5':
+            export_samples_to_csv(samples)
+        elif choice == '6':
             break
         else:
             print("Invalid choice. Please try again.")
