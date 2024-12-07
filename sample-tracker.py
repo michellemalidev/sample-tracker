@@ -3,7 +3,8 @@ import os
 import csv
 
 # File to store sample data
-JSON_DATA_FILE = 'samples_data.json'
+
+JSON_DATA_FILE = 'data.json'
 
 # Load samples from the JSON file
 def load_samples():
